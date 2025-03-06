@@ -1,0 +1,55 @@
+<div ng-controller="AddController as vm" class="container">
+    <header-component></header-component>
+    <i class="fas fa-arrow-left back-btn" ng-click="vm.goBack()"></i>
+    <h1 class="addTitle">Add User</h1>
+    <form name="vm.form" class="addForm" ng-submit="vm.submitForm($event)" method="POST" action="" novalidate>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter Name"   ng-model="vm.name" required ng-minlength="10" ng-maxlength="20" />
+            <span ng-show="vm.submitted && vm.form.name.$error.required">Name is required.</span>
+            <span ng-show="vm.submitted && vm.form.name.$error.minlength">Name must be at least 10 characters.</span>
+            <span ng-show="vm.submitted && vm.form.name.$error.maxlength">Name must not exceed 20 characters.</span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter Email" ng-model="vm.email" validate-email required />
+            <span ng-show="vm.submitted && vm.form.email.$error.required">Email is required.</span>
+            <span ng-show="vm.submitted && vm.form.email.$error.validateEmail">Email is invalid.</span>
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter Phone" ng-model="vm.phone" ng-minlength="10" ng-maxlength="12"  required/>
+            <span ng-show="vm.submitted && vm.form.phone.$error.required">Phone number is required.</span>
+            <span ng-show="vm.submitted && vm.form.phone.$error.minlength">Phone number must be at least 10 characters long.</span>
+            <span ng-show="vm.submitted && vm.form.phone.$error.maxlength">Phone number must not exceed 12 characters.</span>       
+        </div>
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter Age"  ng-model="vm.age" required min="18" max="100" />
+            <span ng-show="vm.submitted && vm.form.age.$error.required">Age is required.</span>
+            <span ng-show="vm.submitted && vm.form.age.$error.min">Age must be greater than or equal to 18.</span>
+            <span ng-show="vm.submitted && vm.form.age.$error.max">Age must be less than or equal to 100.</span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter Password"  ng-model="vm.password" validate-password  required />
+            <span ng-show="vm.submitted && vm.form.password.$error.required">Password is required.</span>
+            <span ng-show="vm.submitted && vm.form.password.$error.validatePassword">Password must contain at least one uppercase letter, one number, and one special character.</span>
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword"  placeholder="Enter Confirm Password"  ng-model="vm.confirmPassword" required match-password="vm.password" />
+            <span ng-show="vm.submitted && vm.form.confirmPassword.$error.required">Confirm Password is required.</span>
+            <span ng-show="vm.submitted && vm.form.confirmPassword.$error.matchPassword">Passwords do not match.</span>
+        </div>
+        <div>
+            <button type="submit" >Submit</button>
+        </div>
+    </form>
+
+    <div ng-show="vm.submitted && vm.form.$valid">
+        <h3>Form Submitted Successfully!</h3>
+        <pre>{{ vm.formData | json }}</pre>
+    </div>
+    <footer-component></footer-component>
+</div>

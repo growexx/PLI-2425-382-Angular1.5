@@ -1,0 +1,16 @@
+<div ng-controller="NewController as vm">
+    <header-component></header-component>
+    <i class="fas fa-arrow-left back-btn" ng-click="vm.goBack()"></i>
+    <div class="newTab">
+    <h1>Customer & Product Information</h1>
+    <my-component
+        customer="vm.selectedCustomer" 
+        product-name="vm.selectedProduct"
+        component-id="abc"> 
+        <p>This is some projected content inside the my-component.</p>
+        <p>Additional information about the customer and product can be shown here.</p>
+    </my-component>
+</div>
+    <footer-component></footer-component>
+</div>
+

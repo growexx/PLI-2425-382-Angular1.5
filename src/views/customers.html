@@ -1,0 +1,33 @@
+<div ng-controller="CustomersController as vm">
+    <header-component></header-component>
+    <h2>Customer List</h2>
+    <div>
+        <p>Filter by Title:</p>
+        <input type="text" ng-model="vm.productFilter.title" placeholder="Search by title" />
+        <button class="addbtn" ng-click="vm.go()">Detail</button>
+        <button class="addbtn" ng-click="vm.addForm()" ng-class="{'ng-enter': true}">Add</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th ng-click="vm.doSort('id')">Id</th>
+                <th ng-click="vm.doSort('title')">Title</th>
+                <th ng-click="vm.doSort('body')">Body</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="prod in vm.products | filter:vm.productFilter | orderBy:vm.sortBy:vm.reverse">
+                <td>{{ prod.id }}</td>
+                <td highlight-text="prod.title" search-text="vm.productFilter.title">{{ prod.title }}</td>
+                <td highlight-text="prod.body" search-text="vm.productFilter.title">{{ prod.body }}</td>
+            </tr>
+            <tr ng-if="(vm.products | filter:vm.productFilter).length === 0">
+                <td colspan="3" style="text-align:center;">No products available</td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <footer-component></footer-component>
+</div>
+
